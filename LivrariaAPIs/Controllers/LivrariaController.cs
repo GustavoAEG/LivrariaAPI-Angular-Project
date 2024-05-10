@@ -51,5 +51,14 @@ namespace LivrariaAPIs.Controllers
                 return item;
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Livro>> PostLivro(Livro livro)
+        {
+            _context.todoProducts.Add(livro);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetItem), new { id = livro.ID }, livro);
+        }
     }
 }
